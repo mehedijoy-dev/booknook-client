@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import ThemeProvider from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
 
 const inter = Inter({
@@ -25,6 +24,8 @@ export const metadata: Metadata = {
     "BookNook is a small online library. Add a book, borrow a book, return a book.",
 };
 
+const themeScript = `(function(){try{var t=localStorage.getItem("booknook-theme");if(t!=="booknook"&&t!=="booknook-dark"){t="booknook"}document.documentElement.setAttribute("data-theme",t)}catch(e){document.documentElement.setAttribute("data-theme","booknook")}})();`;
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -34,11 +35,12 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="flex min-h-screen flex-col">
-        <ThemeProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-        </ThemeProvider>
+        <Navbar />
+        <main className="flex-1">{children}</main>
       </body>
     </html>
   );
