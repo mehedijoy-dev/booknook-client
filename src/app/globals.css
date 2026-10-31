@@ -1,27 +1,114 @@
 @import "tailwindcss";
-@plugin "daisyui";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@plugin "daisyui" {
+  themes:
+    booknook --default,
+    booknook-dark --prefersdark;
+}
+
+@plugin "daisyui/theme" {
+  name: "booknook";
+  default: true;
+  color-scheme: light;
+  --color-base-100: #fbf6ec;
+  --color-base-200: #f3ebd9;
+  --color-base-300: #e6dac0;
+  --color-base-content: #2b2118;
+  --color-primary: #2f5d50;
+  --color-primary-content: #fbf6ec;
+  --color-secondary: #b5532e;
+  --color-secondary-content: #fbf6ec;
+  --color-accent: #c8923a;
+  --color-accent-content: #2b2118;
+  --color-neutral: #3a2e24;
+  --color-neutral-content: #f3ebd9;
+  --color-info: #3b7ea1;
+  --color-info-content: #fbf6ec;
+  --color-success: #3f7d4e;
+  --color-success-content: #fbf6ec;
+  --color-warning: #d9a233;
+  --color-warning-content: #2b2118;
+  --color-error: #b3392f;
+  --color-error-content: #fbf6ec;
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "booknook-dark";
+  prefersdark: true;
+  color-scheme: dark;
+  --color-base-100: #1b1612;
+  --color-base-200: #241e18;
+  --color-base-300: #322a22;
+  --color-base-content: #ede3d0;
+  --color-primary: #6fb59f;
+  --color-primary-content: #10201b;
+  --color-secondary: #d98a63;
+  --color-secondary-content: #2a140a;
+  --color-accent: #e0b35a;
+  --color-accent-content: #2a1f08;
+  --color-neutral: #0f0c0a;
+  --color-neutral-content: #d9cfbb;
+  --color-info: #6fb0d4;
+  --color-info-content: #0c1c26;
+  --color-success: #7bc48b;
+  --color-success-content: #0d2214;
+  --color-warning: #e6b64f;
+  --color-warning-content: #2a1f06;
+  --color-error: #e57a6e;
+  --color-error-content: #2b0d09;
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.75rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    line-height: 1.7;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-playfair), ui-serif, Georgia, serif;
+    letter-spacing: -0.01em;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Same heading style on every section of every page */
+  .section-title {
+    @apply font-display text-3xl font-bold text-base-content md:text-4xl;
+  }
+
+  .section-subtitle {
+    @apply mt-3 max-w-2xl text-base text-base-content/70;
+  }
+
+  .page-container {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
 }
