@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   FaFacebookF,
@@ -36,7 +39,12 @@ const socials = [
 ];
 
 export default function Footer() {
-  const year = new Date().getFullYear();
+  // Client-side a year set korar jonno state & useEffect use kora holo
+  const [year, setYear] = useState<number>(2026); // Default fallback year
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
 
   return (
     <footer className="border-t border-base-300 bg-base-200">
