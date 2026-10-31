@@ -1,3 +1,8 @@
+"use client";
+
+import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+
 export interface AuthUser {
   name: string;
   email: string;
@@ -10,11 +15,23 @@ interface AuthState {
   logout: () => Promise<void>;
 }
 
-// Temporary stub. It will be replaced with the real BetterAuth session.
 export function useAuth(): AuthState {
-  return {
-    user: null,
-    loading: false,
-    logout: async () => {},
+  const router = useRouter();
+  const { data, isPending } = authClient.useSession();
+
+  const user: AuthUser | null = data?.user
+    ? {
+        name: data.user.name,
+        email: data.user.email,
+        image: data.user.image,
+      }
+    : null;
+
+  const logout = async () => {
+    await authClient.signOut();
+    router.push("/");
+    router.refresh();
   };
+
+  return { user, loading: isPending, logout };
 }
