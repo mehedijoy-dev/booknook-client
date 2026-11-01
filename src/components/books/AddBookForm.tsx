@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
+import { LuRotateCcw, LuX } from "react-icons/lu";
 import { useAuth } from "@/hooks/useAuth";
 import { ApiError } from "@/lib/api";
 import { authRequest } from "@/lib/api-client";
@@ -35,6 +36,14 @@ export default function AddBookForm() {
     };
   }, [previewUrl]);
 
+  const hasContent =
+    form.title !== "" ||
+    form.author !== "" ||
+    form.category !== "" ||
+    form.totalCopies !== emptyForm.totalCopies ||
+    form.description !== "" ||
+    file !== null;
+
   const update =
     (field: keyof typeof emptyForm) =>
     (
@@ -66,6 +75,18 @@ export default function AddBookForm() {
 
     setFile(chosen);
     setPreviewUrl(URL.createObjectURL(chosen));
+  };
+
+  const removeImage = () => {
+    setFile(null);
+    setPreviewUrl(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const clearForm = () => {
+    setForm(emptyForm);
+    setFormError("");
+    removeImage();
   };
 
   const fail = (message: string) => {
@@ -107,10 +128,7 @@ export default function AddBookForm() {
       });
 
       toast.success("Book added successfully");
-      setForm(emptyForm);
-      setFile(null);
-      setPreviewUrl(null);
-      if (fileInputRef.current) fileInputRef.current.value = "";
+      clearForm();
     } catch (error) {
       fail(
         error instanceof ApiError
@@ -212,13 +230,25 @@ export default function AddBookForm() {
         </p>
 
         {previewUrl && (
-          <div className="mt-3 w-32 overflow-hidden rounded-box border border-base-300 sm:w-40">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={previewUrl}
-              alt="Selected book cover preview"
-              className="aspect-[3/4] w-full object-cover"
-            />
+          <div className="mt-3 flex flex-wrap items-end gap-4">
+            <div className="w-32 overflow-hidden rounded-box border border-base-300 sm:w-40">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={previewUrl}
+                alt="Selected book cover preview"
+                className="aspect-[3/4] w-full object-cover"
+              />
+            </div>
+
+            <button
+              type="button"
+              onClick={removeImage}
+              disabled={loading}
+              className="btn btn-outline btn-error btn-sm"
+            >
+              <LuX className="h-4 w-4" />
+              Remove image
+            </button>
           </div>
         )}
       </div>
@@ -272,14 +302,26 @@ export default function AddBookForm() {
         </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        className="btn btn-primary w-full sm:w-auto"
-      >
-        {loading && <span className="loading loading-spinner loading-sm" />}
-        {loading ? "Adding book" : "Add Book"}
-      </button>
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <button
+          type="submit"
+          disabled={loading}
+          className="btn btn-primary w-full sm:w-auto"
+        >
+          {loading && <span className="loading loading-spinner loading-sm" />}
+          {loading ? "Adding book" : "Add Book"}
+        </button>
+
+        <button
+          type="button"
+          onClick={clearForm}
+          disabled={loading || !hasContent}
+          className="btn btn-ghost w-full sm:w-auto"
+        >
+          <LuRotateCcw className="h-4 w-4" />
+          Clear form
+        </button>
+      </div>
     </form>
   );
 }
