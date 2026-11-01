@@ -8,6 +8,7 @@ import {
 import { LuClock, LuMail } from "react-icons/lu";
 import Logo from "./Logo";
 import { siteConfig } from "@/lib/site";
+import CurrentYear from "./CurrentYear";
 
 const quickLinks = [
   { href: "/", label: "Home" },
@@ -45,8 +46,6 @@ const socials = [
 ];
 
 export default function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className="mt-16 rounded-t-[2.5rem] bg-neutral text-neutral-content">
       <div className="page-container pt-12 sm:pt-16">
@@ -153,7 +152,7 @@ export default function Footer() {
       <div className="border-t border-white/10">
         <div className="page-container flex flex-col items-center justify-between gap-2 py-5 text-center text-sm text-neutral-content/60 sm:flex-row sm:text-left">
           <p>
-            &copy; {year} {siteConfig.name}. All rights reserved.
+            &copy; <CurrentYear /> {siteConfig.name}. All rights reserved.
           </p>
           <p>Add a book. Borrow a book. Return a book.</p>
         </div>
