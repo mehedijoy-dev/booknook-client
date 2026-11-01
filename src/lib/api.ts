@@ -28,9 +28,16 @@ export async function parseResponse<T>(response: Response): Promise<T> {
   return response.json();
 }
 
-export async function getBooks(limit?: number): Promise<Book[]> {
-  const query = limit ? `?limit=${limit}` : "";
-  const response = await fetch(`${API_URL}/books${query}`, {
+export async function getBooks(
+  limit?: number,
+  addedBy?: string,
+): Promise<Book[]> {
+  const params = new URLSearchParams();
+  if (limit) params.set("limit", String(limit));
+  if (addedBy) params.set("addedBy", addedBy);
+  const query = params.toString();
+
+  const response = await fetch(`${API_URL}/books${query ? `?${query}` : ""}`, {
     cache: "no-store",
   });
 
