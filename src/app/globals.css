@@ -6,33 +6,34 @@
     booknook-dark --prefersdark;
 }
 
+/* Spines and Sunshine: light theme */
 @plugin "daisyui/theme" {
   name: "booknook";
   default: true;
   color-scheme: light;
-  --color-base-100: #fbf6ec;
-  --color-base-200: #f3ebd9;
-  --color-base-300: #e6dac0;
-  --color-base-content: #2b2118;
-  --color-primary: #2f5d50;
-  --color-primary-content: #fbf6ec;
-  --color-secondary: #b5532e;
-  --color-secondary-content: #fbf6ec;
-  --color-accent: #c8923a;
-  --color-accent-content: #2b2118;
-  --color-neutral: #3a2e24;
-  --color-neutral-content: #f3ebd9;
-  --color-info: #3b7ea1;
-  --color-info-content: #fbf6ec;
-  --color-success: #3f7d4e;
-  --color-success-content: #fbf6ec;
-  --color-warning: #d9a233;
-  --color-warning-content: #2b2118;
-  --color-error: #b3392f;
-  --color-error-content: #fbf6ec;
-  --radius-selector: 1rem;
-  --radius-field: 0.5rem;
-  --radius-box: 0.75rem;
+  --color-base-100: #fffbf2;
+  --color-base-200: #f6efdf;
+  --color-base-300: #e9dec6;
+  --color-base-content: #1e1b3a;
+  --color-primary: #5b3df5;
+  --color-primary-content: #ffffff;
+  --color-secondary: #ff7a59;
+  --color-secondary-content: #1e1b3a;
+  --color-accent: #ffc53d;
+  --color-accent-content: #1e1b3a;
+  --color-neutral: #1e1b3a;
+  --color-neutral-content: #fffbf2;
+  --color-info: #3b82f6;
+  --color-info-content: #ffffff;
+  --color-success: #12a37b;
+  --color-success-content: #ffffff;
+  --color-warning: #f59e0b;
+  --color-warning-content: #1e1b3a;
+  --color-error: #e5484d;
+  --color-error-content: #ffffff;
+  --radius-selector: 9999px;
+  --radius-field: 0.75rem;
+  --radius-box: 1.25rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 1px;
@@ -40,33 +41,34 @@
   --noise: 0;
 }
 
+/* Spines and Sunshine: dark theme */
 @plugin "daisyui/theme" {
   name: "booknook-dark";
   prefersdark: true;
   color-scheme: dark;
-  --color-base-100: #1b1612;
-  --color-base-200: #241e18;
-  --color-base-300: #322a22;
-  --color-base-content: #ede3d0;
-  --color-primary: #6fb59f;
-  --color-primary-content: #10201b;
-  --color-secondary: #d98a63;
-  --color-secondary-content: #2a140a;
-  --color-accent: #e0b35a;
-  --color-accent-content: #2a1f08;
-  --color-neutral: #0f0c0a;
-  --color-neutral-content: #d9cfbb;
-  --color-info: #6fb0d4;
-  --color-info-content: #0c1c26;
-  --color-success: #7bc48b;
-  --color-success-content: #0d2214;
-  --color-warning: #e6b64f;
+  --color-base-100: #12102a;
+  --color-base-200: #1a1840;
+  --color-base-300: #292655;
+  --color-base-content: #f4efe6;
+  --color-primary: #8b7bff;
+  --color-primary-content: #0f0c24;
+  --color-secondary: #ff8f70;
+  --color-secondary-content: #2a0f08;
+  --color-accent: #ffd166;
+  --color-accent-content: #1e1b3a;
+  --color-neutral: #0b0a1e;
+  --color-neutral-content: #d9d4ec;
+  --color-info: #6aa9ff;
+  --color-info-content: #0a1a33;
+  --color-success: #3dd6a3;
+  --color-success-content: #04251a;
+  --color-warning: #ffc857;
   --color-warning-content: #2a1f06;
-  --color-error: #e57a6e;
-  --color-error-content: #2b0d09;
-  --radius-selector: 1rem;
-  --radius-field: 0.5rem;
-  --radius-box: 0.75rem;
+  --color-error: #ff6b70;
+  --color-error-content: #2b0a0c;
+  --radius-selector: 9999px;
+  --radius-field: 0.75rem;
+  --radius-box: 1.25rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 1px;
@@ -75,8 +77,17 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* One colour for every category, used on cards, badges and filters */
+@theme {
+  --color-cat-fiction: #ff7a59;
+  --color-cat-science: #14b8a6;
+  --color-cat-history: #e0a100;
+  --color-cat-kids: #ec4899;
+  --color-cat-others: #7c5cff;
 }
 
 @layer base {
@@ -85,7 +96,7 @@
   }
 
   body {
-    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
     line-height: 1.7;
   }
 
@@ -93,39 +104,35 @@
   h2,
   h3,
   h4 {
-    font-family: var(--font-playfair), ui-serif, Georgia, serif;
-    letter-spacing: -0.01em;
+    font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
   }
 }
 
 @layer components {
   /* Same heading style on every section of every page */
   .section-title {
-    @apply font-display text-3xl font-bold text-base-content md:text-4xl;
+    @apply font-display text-3xl font-extrabold text-base-content md:text-4xl;
   }
 
   .section-subtitle {
-    @apply mt-3 max-w-2xl text-base text-base-content/70;
+    @apply mt-3 max-w-2xl text-base text-base-content/70 md:text-lg;
+  }
+
+  /* Small coloured label above a section title */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary;
   }
 
   .page-container {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
-}
-.hero-swiper .swiper-button-next,
-.hero-swiper .swiper-button-prev {
-  display: none;
-}
 
-@media (min-width: 768px) {
-  .hero-swiper .swiper-button-next,
-  .hero-swiper .swiper-button-prev {
-    display: flex;
-  }
-}
-@layer components {
-  /* Buttons lift a little on hover and press down on click */
-  .btn:not(.btn-circle) {
+  /* One button style everywhere: pill shape, bold, lifts on hover */
+  .btn:not(.btn-circle):not(.btn-square) {
+    border-radius: 9999px;
+    font-weight: 700;
     transition:
       translate 0.2s ease,
       scale 0.2s ease,
@@ -135,13 +142,26 @@
       color 0.2s ease;
   }
 
-  .btn:not(.btn-circle):not(:disabled):hover {
+  .btn:not(.btn-circle):not(.btn-square):not(:disabled):hover {
     translate: 0 -2px;
   }
 
-  .btn:not(.btn-circle):not(:disabled):active {
+  .btn:not(.btn-circle):not(.btn-square):not(:disabled):active {
     translate: 0 0;
     scale: 0.97;
+  }
+}
+
+/* Hero slider arrows: hidden on phones, shown from tablet size */
+.hero-swiper .swiper-button-next,
+.hero-swiper .swiper-button-prev {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .hero-swiper .swiper-button-next,
+  .hero-swiper .swiper-button-prev {
+    display: flex;
   }
 }
 
