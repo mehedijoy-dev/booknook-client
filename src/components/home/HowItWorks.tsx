@@ -1,4 +1,5 @@
 import { LuCalendarCheck, LuSearch, LuUndo2 } from "react-icons/lu";
+import Reveal from "@/components/ui/Reveal";
 
 const steps = [
   {
@@ -22,20 +23,22 @@ export default function HowItWorks() {
   return (
     <section className="bg-base-200 py-14 sm:py-20">
       <div className="page-container">
-        <div className="text-center">
+        <Reveal className="text-center">
           <h2 className="section-title">How Borrowing Works</h2>
           <p className="section-subtitle mx-auto">
             Three simple steps from the shelf to your hands.
           </p>
-        </div>
+        </Reveal>
 
         <ol className="mt-10 grid gap-6 md:grid-cols-3">
           {steps.map(({ Icon, title, text }, index) => (
-            <li
+            <Reveal
+              as="li"
               key={title}
-              className="flex h-full flex-col items-center rounded-box border border-base-300 bg-base-100 p-6 text-center"
+              delay={index * 0.12}
+              className="group flex h-full flex-col items-center rounded-box border border-base-300 bg-base-100 p-6 text-center transition-[translate,box-shadow,border-color] duration-300 hover:-translate-y-1.5 hover:border-primary/40 hover:shadow-lg"
             >
-              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-content">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-content transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
                 <Icon className="h-7 w-7" />
               </span>
               <span className="mt-4 text-sm font-semibold text-secondary">
@@ -43,7 +46,7 @@ export default function HowItWorks() {
               </span>
               <h3 className="mt-1 font-display text-xl font-bold">{title}</h3>
               <p className="mt-2 text-sm text-base-content/70">{text}</p>
-            </li>
+            </Reveal>
           ))}
         </ol>
       </div>

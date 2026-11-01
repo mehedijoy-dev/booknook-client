@@ -123,3 +123,30 @@
     display: flex;
   }
 }
+@layer components {
+  /* Buttons lift a little on hover and press down on click */
+  .btn:not(.btn-circle) {
+    transition:
+      translate 0.2s ease,
+      scale 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .btn:not(.btn-circle):not(:disabled):hover {
+    translate: 0 -2px;
+  }
+
+  .btn:not(.btn-circle):not(:disabled):active {
+    translate: 0 0;
+    scale: 0.97;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
