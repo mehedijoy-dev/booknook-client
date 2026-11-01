@@ -74,7 +74,7 @@ export default function BookCard({ book, index = 0 }: BookCardProps) {
 
           <div>
             <h3
-              className={`line-clamp-2 min-h-[3.5rem] font-display text-xl font-bold leading-snug transition-colors duration-300 ${
+              className={`line-clamp-2 font-display text-xl font-bold leading-snug transition-colors duration-300 ${
                 hovered ? "text-primary" : ""
               }`}
             >
