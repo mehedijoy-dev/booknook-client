@@ -56,51 +56,66 @@ export default function RegisterForm() {
       return fail(error.message ?? "Could not create your account. Try again.");
     }
 
-    toast.success("Account created. Please log in.");
+    toast.success("Account created successfully! Please log in.");
     router.push("/login");
   };
 
   return (
-    <div className="mt-8">
+    <div className="mt-6">
       <form onSubmit={handleSubmit} noValidate className="space-y-4">
         {formError && (
-          <div role="alert" className="alert alert-error alert-soft text-sm">
+          <div
+            role="alert"
+            className="alert alert-error text-sm rounded-xl py-3 shadow-sm"
+          >
             <span>{formError}</span>
           </div>
         )}
 
+        {/* Name Input */}
         <div>
-          <label htmlFor="name" className="mb-1 block text-sm font-medium">
-            Name
+          <label
+            htmlFor="name"
+            className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-base-content/70"
+          >
+            Full Name
           </label>
           <input
             id="name"
             type="text"
             value={name}
             onChange={(event) => setName(event.target.value)}
-            placeholder="Your full name"
+            placeholder="Mohammad Joy"
             autoComplete="name"
-            className="input w-full"
+            className="input input-bordered w-full rounded-xl bg-base-100 focus:outline-none focus:ring-2 focus:ring-primary/50"
           />
         </div>
 
+        {/* Email Input */}
         <div>
-          <label htmlFor="email" className="mb-1 block text-sm font-medium">
-            Email
+          <label
+            htmlFor="email"
+            className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-base-content/70"
+          >
+            Email Address
           </label>
           <input
             id="email"
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            placeholder="you@example.com"
+            placeholder="joymehedi890@gmail.com"
             autoComplete="email"
-            className="input w-full"
+            className="input input-bordered w-full rounded-xl bg-base-100 focus:outline-none focus:ring-2 focus:ring-primary/50"
           />
         </div>
 
+        {/* Photo URL Input */}
         <div>
-          <label htmlFor="photo" className="mb-1 block text-sm font-medium">
+          <label
+            htmlFor="photo"
+            className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-base-content/70"
+          >
             Photo URL
           </label>
           <input
@@ -108,59 +123,71 @@ export default function RegisterForm() {
             type="url"
             value={photo}
             onChange={(event) => setPhoto(event.target.value)}
-            placeholder="https://example.com/your-photo.jpg"
+            placeholder="https://i.ibb.co/... or image link"
             autoComplete="photo"
-            className="input w-full"
+            className="input input-bordered w-full rounded-xl bg-base-100 focus:outline-none focus:ring-2 focus:ring-primary/50"
           />
         </div>
 
+        {/* Password Input */}
         <div>
-          <label htmlFor="password" className="mb-1 block text-sm font-medium">
+          <label
+            htmlFor="password"
+            className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-base-content/70"
+          >
             Password
           </label>
           <PasswordInput
             id="password"
             value={password}
             onChange={setPassword}
-            placeholder="Create a password"
+            placeholder="Create a strong password"
             autoComplete="new-password"
             invalid={showPasswordErrors}
           />
           {showPasswordErrors ? (
-            <ul className="mt-2 space-y-1 text-sm text-error">
+            <ul className="mt-2 space-y-1 text-xs text-error font-medium">
               {passwordErrors.map((message) => (
-                <li key={message}>{message}</li>
+                <li key={message}>• {message}</li>
               ))}
             </ul>
           ) : (
-            <p className="mt-2 text-xs text-base-content/60">
-              Use at least 6 characters with an uppercase and a lowercase
-              letter.
+            <p className="mt-2 text-[11px] text-base-content/60 leading-relaxed">
+              Must be at least 6 characters long with at least one uppercase and
+              one lowercase letter.
             </p>
           )}
         </div>
 
+        {/* Submit Button */}
         <button
           type="submit"
           disabled={loading}
-          className="btn btn-primary w-full"
+          className="btn btn-primary w-full rounded-xl font-semibold shadow-md transition hover:scale-[1.01]"
         >
           {loading && <span className="loading loading-spinner loading-sm" />}
-          Register
+          Create Account
         </button>
       </form>
 
-      <div className="divider my-6 text-sm text-base-content/60">or</div>
+      {/* Divider */}
+      <div className="divider my-6 text-xs uppercase tracking-wider text-base-content/40 font-medium">
+        Or continue with
+      </div>
 
-      <GoogleButton callbackURL="/" label="Register with Google" />
+      {/* Google Button */}
+      <div className="rounded-xl overflow-hidden shadow-sm">
+        <GoogleButton callbackURL="/" label="Register with Google" />
+      </div>
 
+      {/* Footer Link */}
       <p className="mt-6 text-center text-sm text-base-content/70">
         Already have an account?{" "}
         <Link
           href="/login"
           className="font-semibold text-primary hover:underline"
         >
-          Login
+          Log in
         </Link>
       </p>
     </div>

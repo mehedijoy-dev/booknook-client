@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { IconType } from "react-icons";
 import {
-  LuArrowRight,
+  LuArrowUpRight,
   LuBaby,
   LuFeather,
   LuFlaskConical,
@@ -15,88 +15,84 @@ const categories: {
   name: Category;
   text: string;
   Icon: IconType;
-  tone: string;
+  tile: string;
+  icon: string;
 }[] = [
   {
     name: "Fiction",
     text: "Novels and stories",
     Icon: LuFeather,
-    tone: "bg-cat-fiction text-[#1e1b3a]",
+    tile: "bg-cat-fiction/10 hover:bg-cat-fiction/20",
+    icon: "text-cat-fiction",
   },
   {
     name: "Science",
     text: "Curious minds",
     Icon: LuFlaskConical,
-    tone: "bg-cat-science text-[#1e1b3a]",
+    tile: "bg-cat-science/10 hover:bg-cat-science/20",
+    icon: "text-cat-science",
   },
   {
     name: "History",
     text: "Look back in time",
     Icon: LuLandmark,
-    tone: "bg-cat-history text-[#1e1b3a]",
+    tile: "bg-cat-history/10 hover:bg-cat-history/20",
+    icon: "text-cat-history",
   },
   {
     name: "Kids",
     text: "Tales for little readers",
     Icon: LuBaby,
-    tone: "bg-cat-kids text-white",
+    tile: "bg-cat-kids/10 hover:bg-cat-kids/20",
+    icon: "text-cat-kids",
   },
   {
     name: "Others",
     text: "Everything else",
     Icon: LuLibrary,
-    tone: "bg-cat-others text-white",
+    tile: "bg-cat-others/10 hover:bg-cat-others/20",
+    icon: "text-cat-others",
   },
 ];
 
 export default function TopCategories() {
   return (
-    <section className="py-20 sm:py-24">
+    <section className="py-20 sm:py-28">
       <div className="page-container">
-        <Reveal className="text-center">
-          <span className="eyebrow">Pick your mood</span>
-          <h2 className="section-title mt-4">Top Categories</h2>
-          <p className="section-subtitle mx-auto">
+        <Reveal>
+          <span className="eyebrow">Categories</span>
+          <h2 className="section-title mt-2">Top categories</h2>
+          <p className="section-subtitle">
             Jump straight to the kind of book you feel like reading.
           </p>
         </Reveal>
 
-        <ul className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-5">
-          {categories.map(({ name, text, Icon, tone }, index) => (
-            <Reveal as="li" key={name} delay={index * 0.08} className="h-full">
+        <ul className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
+          {categories.map(({ name, text, Icon, tile, icon }, index) => (
+            <Reveal
+              as="li"
+              key={name}
+              delay={index * 0.06}
+              className="last:col-span-2 sm:last:col-span-1"
+            >
               <Link
                 href={`/books?category=${name}`}
-                className={`group relative flex h-full min-h-[200px] flex-col justify-between overflow-hidden rounded-3xl p-5 transition-all duration-300 hover:-translate-y-2 hover:rotate-1 hover:shadow-2xl sm:min-h-[220px] ${tone}`}
+                className={`group flex h-full min-h-[180px] flex-col justify-between rounded-3xl p-5 transition-all duration-300 hover:-translate-y-1 sm:min-h-[200px] ${tile}`}
               >
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -right-3 -top-6 select-none font-display text-[8rem] font-extrabold leading-none opacity-15"
-                >
-                  {name.charAt(0)}
-                </span>
-
-                <Icon className="relative h-9 w-9 transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6" />
-
-                <div className="relative">
-                  <span className="block font-display text-2xl font-extrabold">
-                    {name}
-                  </span>
-                  <span className="mt-1 block text-sm opacity-80">{text}</span>
-                  <span className="mt-3 inline-flex items-center gap-1 text-sm font-bold">
-                    Browse
-                    <LuArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                <div className="flex items-start justify-between">
+                  <Icon className={`h-8 w-8 ${icon}`} />
+                  <LuArrowUpRight className="h-5 w-5 text-base-content/0 transition-all duration-300 group-hover:text-base-content/60" />
+                </div>
+                <div>
+                  <span className="block text-xl font-semibold">{name}</span>
+                  <span className="mt-0.5 block text-sm text-base-content/60">
+                    {text}
                   </span>
                 </div>
               </Link>
             </Reveal>
           ))}
         </ul>
-
-        {/* A little shelf under the books */}
-        <div
-          aria-hidden="true"
-          className="mx-auto mt-5 hidden h-3 rounded-full bg-base-300 lg:block"
-        />
       </div>
     </section>
   );

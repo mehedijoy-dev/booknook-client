@@ -1,25 +1,20 @@
 import Link from "next/link";
-import { getBooks } from "@/lib/api";
 import type { Book } from "@/types/book";
 import BookCard from "@/components/books/BookCard";
 
-export default async function NewArrivals() {
-  let books: Book[] = [];
-  let failed = false;
+interface NewArrivalsProps {
+  books: Book[];
+  failed: boolean;
+}
 
-  try {
-    books = await getBooks(6);
-  } catch {
-    failed = true;
-  }
-
+export default function NewArrivals({ books, failed }: NewArrivalsProps) {
   return (
     <section className="py-20 sm:py-24">
       <div className="page-container">
-        <div className="text-center">
+        <div>
           <span className="eyebrow">Fresh on the shelf</span>
-          <h2 className="section-title mt-4">New Arrivals</h2>
-          <p className="section-subtitle mx-auto">
+          <h2 className="section-title mt-4">New arrivals</h2>
+          <p className="section-subtitle">
             The latest books added to the BookNook shelf.
           </p>
         </div>
@@ -27,7 +22,7 @@ export default async function NewArrivals() {
         {failed ? (
           <div
             role="alert"
-            className="alert alert-error alert-soft mx-auto mt-12 max-w-xl"
+            className="alert alert-error alert-soft mt-12 max-w-xl"
           >
             <span>
               We could not load the new arrivals right now. Please try again in
@@ -35,7 +30,7 @@ export default async function NewArrivals() {
             </span>
           </div>
         ) : books.length === 0 ? (
-          <div className="mx-auto mt-12 max-w-xl rounded-box border border-dashed border-base-300 p-8 text-center">
+          <div className="mt-12 max-w-xl rounded-box border border-dashed border-base-300 p-8">
             <p className="text-base-content/70">
               The shelf is empty for now. Be the first to add a book.
             </p>
