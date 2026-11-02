@@ -6,34 +6,34 @@
     booknook-dark --prefersdark;
 }
 
-/* Spines and Sunshine: light theme */
+/* Ink and paper: light */
 @plugin "daisyui/theme" {
   name: "booknook";
   default: true;
   color-scheme: light;
-  --color-base-100: #fffbf2;
-  --color-base-200: #f6efdf;
-  --color-base-300: #e9dec6;
-  --color-base-content: #1e1b3a;
-  --color-primary: #5b3df5;
-  --color-primary-content: #ffffff;
-  --color-secondary: #ff7a59;
-  --color-secondary-content: #1e1b3a;
-  --color-accent: #ffc53d;
-  --color-accent-content: #1e1b3a;
-  --color-neutral: #1e1b3a;
-  --color-neutral-content: #fffbf2;
-  --color-info: #3b82f6;
+  --color-base-100: #fbf7f0;
+  --color-base-200: #f3ecdf;
+  --color-base-300: #e2d6c0;
+  --color-base-content: #1b1a17;
+  --color-primary: #1d3557;
+  --color-primary-content: #fbf7f0;
+  --color-secondary: #c8553d;
+  --color-secondary-content: #ffffff;
+  --color-accent: #e9a23b;
+  --color-accent-content: #1b1a17;
+  --color-neutral: #14213d;
+  --color-neutral-content: #ede6d6;
+  --color-info: #2f6fb5;
   --color-info-content: #ffffff;
-  --color-success: #12a37b;
+  --color-success: #2e8b6a;
   --color-success-content: #ffffff;
-  --color-warning: #f59e0b;
-  --color-warning-content: #1e1b3a;
-  --color-error: #e5484d;
+  --color-warning: #e9a23b;
+  --color-warning-content: #1b1a17;
+  --color-error: #c0392b;
   --color-error-content: #ffffff;
   --radius-selector: 9999px;
-  --radius-field: 0.75rem;
-  --radius-box: 1.25rem;
+  --radius-field: 0.625rem;
+  --radius-box: 1rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 1px;
@@ -41,34 +41,34 @@
   --noise: 0;
 }
 
-/* Spines and Sunshine: dark theme */
+/* Ink and paper: dark */
 @plugin "daisyui/theme" {
   name: "booknook-dark";
   prefersdark: true;
   color-scheme: dark;
-  --color-base-100: #12102a;
-  --color-base-200: #1a1840;
-  --color-base-300: #292655;
-  --color-base-content: #f4efe6;
-  --color-primary: #8b7bff;
-  --color-primary-content: #0f0c24;
-  --color-secondary: #ff8f70;
-  --color-secondary-content: #2a0f08;
-  --color-accent: #ffd166;
-  --color-accent-content: #1e1b3a;
-  --color-neutral: #0b0a1e;
-  --color-neutral-content: #d9d4ec;
-  --color-info: #6aa9ff;
-  --color-info-content: #0a1a33;
-  --color-success: #3dd6a3;
-  --color-success-content: #04251a;
-  --color-warning: #ffc857;
-  --color-warning-content: #2a1f06;
-  --color-error: #ff6b70;
-  --color-error-content: #2b0a0c;
+  --color-base-100: #0e1522;
+  --color-base-200: #152033;
+  --color-base-300: #25324b;
+  --color-base-content: #ede6d6;
+  --color-primary: #e9a23b;
+  --color-primary-content: #1b1a17;
+  --color-secondary: #e0775c;
+  --color-secondary-content: #1b1a17;
+  --color-accent: #8ec5e8;
+  --color-accent-content: #0e1522;
+  --color-neutral: #080d16;
+  --color-neutral-content: #d5cdbb;
+  --color-info: #7fb1e3;
+  --color-info-content: #0e1522;
+  --color-success: #5cc9a0;
+  --color-success-content: #0e1522;
+  --color-warning: #f2c46d;
+  --color-warning-content: #1b1a17;
+  --color-error: #f0786a;
+  --color-error-content: #1b1a17;
   --radius-selector: 9999px;
-  --radius-field: 0.75rem;
-  --radius-box: 1.25rem;
+  --radius-field: 0.625rem;
+  --radius-box: 1rem;
   --size-selector: 0.25rem;
   --size-field: 0.25rem;
   --border: 1px;
@@ -77,17 +77,17 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-dmsans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
 }
 
-/* One colour for every category, used on cards, badges and filters */
+/* One colour for every category, used on cards, lists and filters */
 @theme {
-  --color-cat-fiction: #ff7a59;
-  --color-cat-science: #14b8a6;
-  --color-cat-history: #e0a100;
-  --color-cat-kids: #ec4899;
-  --color-cat-others: #7c5cff;
+  --color-cat-fiction: #c8553d;
+  --color-cat-science: #2a9d8f;
+  --color-cat-history: #d99a22;
+  --color-cat-kids: #d6457b;
+  --color-cat-others: #5e60ce;
 }
 
 @layer base {
@@ -96,7 +96,7 @@
   }
 
   body {
-    font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-dmsans), ui-sans-serif, system-ui, sans-serif;
     line-height: 1.7;
   }
 
@@ -104,34 +104,34 @@
   h2,
   h3,
   h4 {
-    font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-fraunces), ui-serif, Georgia, serif;
     letter-spacing: -0.02em;
-    line-height: 1.15;
+    line-height: 1.12;
   }
 }
 
 @layer components {
   /* Same heading style on every section of every page */
   .section-title {
-    @apply font-display text-3xl font-extrabold text-base-content md:text-4xl;
+    @apply font-display text-3xl font-extrabold text-base-content sm:text-4xl lg:text-5xl;
   }
 
   .section-subtitle {
     @apply mt-3 max-w-2xl text-base text-base-content/70 md:text-lg;
   }
 
-  /* Small coloured label above a section title */
+  /* Small label with a line, above a section title */
   .eyebrow {
-    @apply inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary;
+    @apply inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-secondary before:h-px before:w-8 before:bg-secondary before:content-[''];
   }
 
   .page-container {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
 
-  /* One button style everywhere: pill shape, bold, lifts on hover */
+  /* One button style everywhere: slightly rounded, bold, lifts on hover */
   .btn:not(.btn-circle):not(.btn-square) {
-    border-radius: 9999px;
+    border-radius: 0.625rem;
     font-weight: 700;
     transition:
       translate 0.2s ease,
