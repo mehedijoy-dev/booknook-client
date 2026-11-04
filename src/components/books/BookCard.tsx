@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import type { Book, Category } from "@/types/book";
@@ -21,7 +20,6 @@ interface BookCardProps {
 
 export default function BookCard({ book, index = 0 }: BookCardProps) {
   const reduce = useReducedMotion();
-  const [hovered, setHovered] = useState(false);
   const available = book.availableCopies > 0;
 
   return (
@@ -36,21 +34,16 @@ export default function BookCard({ book, index = 0 }: BookCardProps) {
         ease: "easeOut",
       }}
     >
-      <motion.article
-        whileHover={reduce ? undefined : { y: -8 }}
-        transition={{ type: "spring", stiffness: 300, damping: 24 }}
-        onHoverStart={() => setHovered(true)}
-        onHoverEnd={() => setHovered(false)}
-        className="group flex w-full flex-col"
-      >
-        <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-base-200 shadow-[0_10px_30px_-14px_rgba(0,0,0,0.35)] transition-shadow duration-300 group-hover:shadow-[0_28px_50px_-18px_rgba(0,0,0,0.45)]">
+      {/* Hover is pure CSS, so it always works */}
+      <article className="group flex w-full flex-col rounded-3xl bg-base-200 p-4 ring-1 ring-transparent transition-all duration-300 hover:-translate-y-2 hover:bg-base-100 hover:shadow-2xl hover:ring-primary/40">
+        <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-base-300 shadow-md">
           <BookCover
             src={book.image}
             alt={`Cover of ${book.title}`}
-            className="absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-105"
+            className="absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-110"
           />
 
-          <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-base-100/90 px-3 py-1 text-xs font-semibold text-base-content backdrop-blur">
+          <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-base-100/90 px-3 py-1 text-xs font-bold text-base-content shadow-sm backdrop-blur">
             <span
               className={`h-2 w-2 rounded-full ${
                 available ? "bg-success" : "bg-error"
@@ -61,28 +54,28 @@ export default function BookCard({ book, index = 0 }: BookCardProps) {
         </div>
 
         <div className="flex flex-1 flex-col pt-4">
-          <span className="inline-flex items-center gap-2 text-xs font-medium text-base-content/60">
+          <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-base-content/75">
             <span className={`h-2 w-2 rounded-full ${dots[book.category]}`} />
             {book.category}
           </span>
 
-          <h3 className="mt-1.5 line-clamp-2 text-lg font-semibold leading-snug tracking-tight">
+          <h3 className="mt-1.5 line-clamp-2 text-lg font-bold leading-snug transition-colors duration-300 group-hover:text-primary">
             {book.title}
           </h3>
-          <p className="mt-0.5 line-clamp-1 text-sm text-base-content/60">
+          <p className="mt-1 line-clamp-1 text-sm font-medium text-base-content/80">
             by {book.author}
           </p>
 
           <div className="mt-auto pt-4">
             <Link
               href={`/books/${book._id}`}
-              className={`btn w-full ${hovered ? "btn-primary" : "btn-soft"}`}
+              className="btn w-full border-0 bg-base-100 text-base-content shadow-sm transition-colors group-hover:bg-primary group-hover:text-primary-content"
             >
               View Details
             </Link>
           </div>
         </div>
-      </motion.article>
+      </article>
     </motion.div>
   );
 }
