@@ -7,28 +7,30 @@ import HeroSearch from "@/components/home/HeroSearch";
 import NewArrivals from "@/components/home/NewArrivals";
 import HowItWorks from "@/components/home/HowItWorks";
 import TopCategories from "@/components/home/TopCategories";
+import AddBookPromo from "@/components/home/AddBookPromo";
 import Spinner from "@/components/ui/Spinner";
 
 export const metadata: Metadata = { title: "Home" };
 
 async function HomeContent() {
-  let books: Book[] = [];
-  let failed = false;
+  // The newest 6 come from MongoDB with sort and limit. The full list only
+  // feeds the category tiles (counts and covers).
+  const [latest, everything] = await Promise.allSettled([
+    getBooks(6),
+    getBooks(),
+  ]);
 
-  try {
-    // The server sorts by newest and limits to 6 in MongoDB
-    books = await getBooks(6);
-  } catch {
-    failed = true;
-  }
+  const newest: Book[] = latest.status === "fulfilled" ? latest.value : [];
+  const all: Book[] = everything.status === "fulfilled" ? everything.value : [];
 
   return (
     <>
-      <HeroSlider books={books} />
+      <HeroSlider books={newest} />
       <HeroSearch />
-      <NewArrivals books={books} failed={failed} />
+      <NewArrivals books={newest} failed={latest.status === "rejected"} />
       <HowItWorks />
-      <TopCategories />
+      <TopCategories books={all} />
+      <AddBookPromo />
     </>
   );
 }
