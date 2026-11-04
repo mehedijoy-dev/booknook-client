@@ -8,90 +8,117 @@ import {
   LuLandmark,
   LuLibrary,
 } from "react-icons/lu";
-import type { Category } from "@/types/book";
+import BookCover from "@/components/books/BookCover";
 import Reveal from "@/components/ui/Reveal";
+import type { Book, Category } from "@/types/book";
 
 const categories: {
   name: Category;
   text: string;
   Icon: IconType;
-  tile: string;
-  icon: string;
+  tone: string;
 }[] = [
   {
     name: "Fiction",
     text: "Novels and stories",
     Icon: LuFeather,
-    tile: "bg-cat-fiction/10 hover:bg-cat-fiction/20",
-    icon: "text-cat-fiction",
+    tone: "bg-cat-fiction text-white",
   },
   {
     name: "Science",
     text: "Curious minds",
     Icon: LuFlaskConical,
-    tile: "bg-cat-science/10 hover:bg-cat-science/20",
-    icon: "text-cat-science",
+    tone: "bg-cat-science text-white",
   },
   {
     name: "History",
     text: "Look back in time",
     Icon: LuLandmark,
-    tile: "bg-cat-history/10 hover:bg-cat-history/20",
-    icon: "text-cat-history",
+    tone: "bg-cat-history text-[#0f1f1c]",
   },
   {
     name: "Kids",
     text: "Tales for little readers",
     Icon: LuBaby,
-    tile: "bg-cat-kids/10 hover:bg-cat-kids/20",
-    icon: "text-cat-kids",
+    tone: "bg-cat-kids text-white",
   },
   {
     name: "Others",
     text: "Everything else",
     Icon: LuLibrary,
-    tile: "bg-cat-others/10 hover:bg-cat-others/20",
-    icon: "text-cat-others",
+    tone: "bg-cat-others text-white",
   },
 ];
 
-export default function TopCategories() {
+const coverSpots = [
+  "-bottom-3 right-12 w-[40%] -rotate-6",
+  "-bottom-5 -right-3 w-[44%] rotate-6",
+];
+
+export default function TopCategories({ books }: { books: Book[] }) {
   return (
-    <section className="py-20 sm:py-28">
+    <section className="py-20 sm:py-24">
       <div className="page-container">
-        <Reveal>
-          <span className="eyebrow">Categories</span>
-          <h2 className="section-title mt-2">Top categories</h2>
-          <p className="section-subtitle">
-            Jump straight to the kind of book you feel like reading.
-          </p>
+        <Reveal className="text-center">
+          <span className="eyebrow">Book categories</span>
+          <h2 className="section-title mx-auto mt-3 max-w-3xl">
+            What kind of story are you craving today?
+          </h2>
         </Reveal>
 
         <ul className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
-          {categories.map(({ name, text, Icon, tile, icon }, index) => (
-            <Reveal
-              as="li"
-              key={name}
-              delay={index * 0.06}
-              className="last:col-span-2 sm:last:col-span-1"
-            >
-              <Link
-                href={`/books?category=${name}`}
-                className={`group flex h-full min-h-[180px] flex-col justify-between rounded-3xl p-5 transition-all duration-300 hover:-translate-y-1 sm:min-h-[200px] ${tile}`}
+          {categories.map(({ name, text, Icon, tone }, index) => {
+            const list = books.filter((book) => book.category === name);
+            const covers = list.slice(0, 2);
+
+            return (
+              <Reveal
+                as="li"
+                key={name}
+                delay={index * 0.06}
+                className="last:col-span-2 sm:last:col-span-1"
               >
-                <div className="flex items-start justify-between">
-                  <Icon className={`h-8 w-8 ${icon}`} />
-                  <LuArrowUpRight className="h-5 w-5 text-base-content/0 transition-all duration-300 group-hover:text-base-content/60" />
-                </div>
-                <div>
-                  <span className="block text-xl font-semibold">{name}</span>
-                  <span className="mt-0.5 block text-sm text-base-content/60">
-                    {text}
+                <Link
+                  href={`/books?category=${name}`}
+                  className={`group relative flex h-full min-h-[260px] flex-col justify-between overflow-hidden rounded-3xl p-5 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${tone}`}
+                >
+                  <span className="relative z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/25 transition-transform duration-300 group-hover:rotate-45">
+                    <LuArrowUpRight className="h-5 w-5" />
                   </span>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
+
+                  {covers.length > 0 ? (
+                    covers.map((book, coverIndex) => (
+                      <div
+                        key={book._id}
+                        className={`absolute overflow-hidden rounded-md shadow-xl ring-1 ring-black/10 transition-transform duration-300 group-hover:scale-110 ${coverSpots[coverIndex]}`}
+                      >
+                        <div className="relative aspect-[3/4] w-full bg-base-300">
+                          <BookCover
+                            src={book.image}
+                            alt={`Cover of ${book.title}`}
+                            className="absolute inset-0 h-full w-full"
+                          />
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <Icon className="absolute -bottom-4 -right-4 h-32 w-32 opacity-20" />
+                  )}
+
+                  <div className="relative z-10">
+                    <p className="text-sm font-semibold opacity-90">
+                      {list.length > 0
+                        ? `${list.length} ${list.length === 1 ? "book" : "books"}`
+                        : text}
+                    </p>
+                    <p className="font-display text-3xl font-extrabold uppercase leading-none">
+                      {name}
+                    </p>
+                  </div>
+                </Link>
+              </Reveal>
+            );
+          })}
         </ul>
       </div>
     </section>
