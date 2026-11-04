@@ -11,11 +11,17 @@ export default function NewArrivals({ books, failed }: NewArrivalsProps) {
   return (
     <section className="py-20 sm:py-24">
       <div className="page-container">
-        <div>
-          <span className="eyebrow">Fresh on the shelf</span>
-          <h2 className="section-title mt-4">New arrivals</h2>
-          <p className="section-subtitle">
-            The latest books added to the BookNook shelf.
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <span className="eyebrow">Fresh on the shelf</span>
+            <h2 className="section-title mt-3">
+              New
+              <br />
+              arrivals
+            </h2>
+          </div>
+          <p className="section-subtitle md:mt-0 md:max-w-sm">
+            The latest books added to the BookNook shelf, newest first.
           </p>
         </div>
 

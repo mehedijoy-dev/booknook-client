@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { LuCalendarCheck, LuSearch, LuUndo2 } from "react-icons/lu";
 import Reveal from "@/components/ui/Reveal";
 
@@ -21,27 +22,38 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="bg-base-200 py-20 sm:py-28">
-      <div className="page-container">
+    <section className="bg-accent/15 py-20 sm:py-24">
+      <div className="page-container grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
         <Reveal>
-          <span className="eyebrow">How it works</span>
-          <h2 className="section-title mt-2">How borrowing works</h2>
+          <span className="eyebrow">Simple as 1, 2, 3</span>
+          <h2 className="section-title mt-3">
+            How borrowing
+            <br />
+            works
+          </h2>
           <p className="section-subtitle">
             Three simple steps from the shelf to your hands.
           </p>
+          <Link href="/books" className="btn btn-primary mt-8">
+            Browse Books
+          </Link>
         </Reveal>
 
-        <ol className="mt-14 grid gap-12 md:grid-cols-3 md:gap-14">
+        <ol className="grid gap-4 sm:grid-cols-3">
           {steps.map(({ Icon, title, text }, index) => (
-            <Reveal as="li" key={title} delay={index * 0.1}>
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-base-100 shadow-sm ring-1 ring-base-300">
-                <Icon className="h-5 w-5" />
-              </span>
-              <p className="mt-6 text-sm font-semibold text-secondary">
-                Step {index + 1}
-              </p>
-              <h3 className="mt-1 text-xl font-semibold">{title}</h3>
-              <p className="mt-2 text-base-content/65">{text}</p>
+            <Reveal as="li" key={title} delay={index * 0.1} className="h-full">
+              <div className="flex h-full flex-col rounded-3xl bg-base-100 p-6 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                <div className="flex items-start justify-between">
+                  <span className="font-display text-6xl font-extrabold leading-none text-accent">
+                    {`0${index + 1}`}
+                  </span>
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-secondary text-secondary-content">
+                    <Icon className="h-5 w-5" />
+                  </span>
+                </div>
+                <h3 className="mt-8 text-xl font-bold">{title}</h3>
+                <p className="mt-2 text-sm text-base-content/70">{text}</p>
+              </div>
             </Reveal>
           ))}
         </ol>
