@@ -14,10 +14,10 @@ export default function UserMenu({ user, onLogout }: UserMenuProps) {
       <div
         tabIndex={0}
         role="button"
-        className="btn btn-ghost btn-circle avatar"
+        className="btn btn-ghost btn-circle avatar hover:bg-white/10"
         aria-label="Open user menu"
       >
-        <div className="w-10 rounded-full ring-2 ring-primary ring-offset-2 ring-offset-base-100">
+        <div className="w-10 rounded-full ring-2 ring-accent ring-offset-2 ring-offset-neutral">
           {user.image ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -34,7 +34,7 @@ export default function UserMenu({ user, onLogout }: UserMenuProps) {
       </div>
       <ul
         tabIndex={0}
-        className="menu dropdown-content z-50 mt-3 w-56 rounded-box border border-base-300 bg-base-100 p-2 shadow-lg"
+        className="menu dropdown-content z-50 mt-3 w-60 rounded-box border border-base-300 bg-base-100 p-2 text-base-content shadow-xl"
       >
         <li className="menu-title truncate px-3 py-2 text-base-content">
           {user.name}

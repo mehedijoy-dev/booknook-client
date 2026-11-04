@@ -12,7 +12,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={() => setTheme(isDark ? "booknook" : "booknook-dark")}
       disabled={theme === null}
-      className="btn btn-ghost btn-circle"
+      className="btn btn-ghost btn-circle text-white hover:bg-white/10"
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       title={isDark ? "Light theme" : "Dark theme"}
     >

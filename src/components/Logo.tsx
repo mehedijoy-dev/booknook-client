@@ -10,11 +10,13 @@ export default function Logo() {
     >
       <span
         aria-hidden="true"
-        className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-content"
+        className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-content"
       >
-        <LuBookOpen className="h-4 w-4" />
+        <LuBookOpen className="h-5 w-5" />
       </span>
-      <span className="text-xl font-semibold tracking-tight">BookNook</span>
+      <span className="font-display text-2xl font-extrabold uppercase tracking-wide">
+        BookNook
+      </span>
     </Link>
   );
 }
