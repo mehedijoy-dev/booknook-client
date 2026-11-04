@@ -18,7 +18,13 @@ const quickLinks = [
   { href: "/my-borrows", label: "My Borrows" },
 ];
 
-const categories = ["Fiction", "Science", "History", "Kids", "Others"];
+const categories = [
+  { name: "Fiction", dot: "bg-cat-fiction" },
+  { name: "Science", dot: "bg-cat-science" },
+  { name: "History", dot: "bg-cat-history" },
+  { name: "Kids", dot: "bg-cat-kids" },
+  { name: "Others", dot: "bg-cat-others" },
+];
 
 const socials = [
   { label: "BookNook on X", href: siteConfig.socials.x, Icon: FaXTwitter },
@@ -39,19 +45,26 @@ const socials = [
   },
 ];
 
-const linkClass = "transition-colors hover:text-base-content";
+const linkClass = "transition-colors hover:text-accent";
 
 export default function Footer() {
   return (
-    <footer className="mt-24 border-t border-base-300 bg-base-200">
-      <div className="page-container grid gap-12 py-14 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.3fr]">
+    <footer className="bg-neutral text-neutral-content">
+      {/* One stripe in the colour of every category */}
+      <div aria-hidden="true" className="flex h-1.5">
+        {categories.map(({ name, dot }) => (
+          <span key={name} className={`flex-1 ${dot}`} />
+        ))}
+      </div>
+
+      <div className="page-container grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.3fr]">
         <div>
           <Logo />
-          <p className="mt-4 max-w-sm text-sm text-base-content/60">
+          <p className="mt-5 max-w-sm text-sm text-neutral-content/70">
             {siteConfig.tagline}
           </p>
 
-          <ul className="mt-6 flex items-center gap-2">
+          <ul className="mt-6 flex items-center gap-3">
             {socials.map(({ label, href, Icon }) => (
               <li key={label}>
                 <a
@@ -59,7 +72,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-base-100 text-base-content/70 ring-1 ring-base-300 transition-colors hover:bg-primary hover:text-primary-content"
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-all duration-300 hover:-translate-y-1 hover:bg-accent hover:text-accent-content"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -69,8 +82,10 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold">Explore</h3>
-          <ul className="mt-4 space-y-2.5 text-sm text-base-content/60">
+          <h3 className="font-display text-xl font-bold uppercase tracking-wide text-white">
+            Explore
+          </h3>
+          <ul className="mt-4 space-y-2.5 text-sm text-neutral-content/70">
             {quickLinks.map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className={linkClass}>
@@ -82,11 +97,17 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold">Categories</h3>
-          <ul className="mt-4 space-y-2.5 text-sm text-base-content/60">
-            {categories.map((name) => (
+          <h3 className="font-display text-xl font-bold uppercase tracking-wide text-white">
+            Categories
+          </h3>
+          <ul className="mt-4 space-y-2.5 text-sm text-neutral-content/70">
+            {categories.map(({ name, dot }) => (
               <li key={name}>
-                <Link href={`/books?category=${name}`} className={linkClass}>
+                <Link
+                  href={`/books?category=${name}`}
+                  className={`inline-flex items-center gap-2 ${linkClass}`}
+                >
+                  <span className={`h-2.5 w-2.5 rounded-full ${dot}`} />
                   {name}
                 </Link>
               </li>
@@ -95,10 +116,12 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="text-sm font-semibold">Contact</h3>
-          <ul className="mt-4 space-y-3 text-sm text-base-content/60">
+          <h3 className="font-display text-xl font-bold uppercase tracking-wide text-white">
+            Contact
+          </h3>
+          <ul className="mt-4 space-y-3 text-sm text-neutral-content/70">
             <li className="flex items-start gap-2">
-              <LuMail className="mt-0.5 h-4 w-4 shrink-0" />
+              <LuMail className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
               <a
                 href={`mailto:${siteConfig.email}`}
                 className={`break-all ${linkClass}`}
@@ -107,15 +130,15 @@ export default function Footer() {
               </a>
             </li>
             <li className="flex items-start gap-2">
-              <LuClock className="mt-0.5 h-4 w-4 shrink-0" />
+              <LuClock className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
               <span>{siteConfig.hours}</span>
             </li>
           </ul>
         </div>
       </div>
 
-      <div className="border-t border-base-300">
-        <div className="page-container flex flex-col items-center justify-between gap-2 py-5 text-center text-xs text-base-content/55 sm:flex-row sm:text-left">
+      <div className="border-t border-white/10">
+        <div className="page-container flex flex-col items-center justify-between gap-2 py-5 text-center text-sm text-neutral-content/60 sm:flex-row sm:text-left">
           <p>
             &copy; <CurrentYear /> {siteConfig.name}. All rights reserved.
           </p>
