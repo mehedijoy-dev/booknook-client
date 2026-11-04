@@ -8,13 +8,12 @@ import Spinner from "@/components/ui/Spinner";
 
 export const metadata: Metadata = { title: "All Books" };
 
-async function BooksList({
-  searchParams,
-}: {
-  searchParams: Promise<{ category?: string }>;
-}) {
-  const { category } = await searchParams;
+type SearchParams = Promise<{ category?: string; q?: string }>;
+
+async function BooksList({ searchParams }: { searchParams: SearchParams }) {
+  const { category, q } = await searchParams;
   const initialCategory = CATEGORIES.find((item) => item === category) ?? "All";
+  const initialQuery = (q ?? "").trim().slice(0, 80);
 
   let books: Book[] = [];
   try {
@@ -32,18 +31,25 @@ async function BooksList({
     );
   }
 
-  return <BooksExplorer books={books} initialCategory={initialCategory} />;
+  return (
+    <BooksExplorer
+      books={books}
+      initialCategory={initialCategory}
+      initialQuery={initialQuery}
+    />
+  );
 }
 
 export default function BooksPage({
   searchParams,
 }: {
-  searchParams: Promise<{ category?: string }>;
+  searchParams: SearchParams;
 }) {
   return (
     <section className="page-container py-10 sm:py-16">
       <div className="text-center">
-        <h1 className="section-title">All Books</h1>
+        <span className="eyebrow">The shelf</span>
+        <h1 className="section-title mt-3">All Books</h1>
         <p className="section-subtitle mx-auto">
           Every book on the BookNook shelf. Find one and borrow it for a week.
         </p>

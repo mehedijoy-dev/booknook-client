@@ -13,13 +13,15 @@ const filters: CategoryFilter[] = ["All", ...CATEGORIES];
 interface BooksExplorerProps {
   books: Book[];
   initialCategory?: CategoryFilter;
+  initialQuery?: string;
 }
 
 export default function BooksExplorer({
   books,
   initialCategory = "All",
+  initialQuery = "",
 }: BooksExplorerProps) {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(initialQuery);
   const [category, setCategory] = useState<CategoryFilter>(initialCategory);
 
   const visibleBooks = useMemo(() => {
@@ -46,7 +48,7 @@ export default function BooksExplorer({
   return (
     <div>
       <div className="mx-auto max-w-2xl">
-        <label className="input w-full">
+        <label className="input w-full rounded-full">
           <LuSearch className="h-4 w-4 opacity-60" aria-hidden="true" />
           <input
             type="search"
