@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -17,6 +18,7 @@ interface Part {
 interface Slide {
   parts: Part[];
   text: string;
+  image: string;
   shift: number;
 }
 
@@ -30,6 +32,7 @@ const slides: Slide[] = [
       { t: " journey" },
     ],
     text: "Browse a shelf full of page-turners shared by readers like you.",
+    image: "/images/hero/slide-1.jpg",
     shift: 0,
   },
   {
@@ -40,6 +43,7 @@ const slides: Slide[] = [
       { t: "shelf", c: "text-cat-science" },
     ],
     text: "List it in a minute so someone else can enjoy it too.",
+    image: "/images/hero/slide-2.jpg",
     shift: 2,
   },
   {
@@ -50,6 +54,7 @@ const slides: Slide[] = [
       { t: "one click", c: "text-accent" },
     ],
     text: "Pick a book, confirm, and read at your own pace.",
+    image: "/images/hero/slide-3.jpg",
     shift: 4,
   },
 ];
@@ -117,21 +122,31 @@ export default function HeroSlider({ books }: { books: Book[] }) {
       className="hero-swiper"
       style={swiperTheme}
     >
-      {slides.map((slide) => (
+      {slides.map((slide, index) => (
         <SwiperSlide key={slide.text}>
           <div className="relative isolate flex min-h-[560px] items-center justify-center overflow-hidden bg-neutral px-4 pb-28 pt-16 text-center sm:min-h-[600px]">
+            <Image
+              src={slide.image}
+              alt=""
+              fill
+              priority={index === 0}
+              sizes="100vw"
+              className="-z-20 object-cover"
+            />
+            <div className="absolute inset-0 -z-10 bg-neutral/80" />
+
             <Floaters books={books} shift={slide.shift} />
 
             <div className="relative z-20 mx-auto max-w-3xl">
               <h2 className="font-display text-5xl font-extrabold uppercase leading-[0.92] tracking-tight text-white sm:text-6xl lg:text-7xl">
-                {slide.parts.map((part, index) => (
-                  <span key={index} className={part.c}>
+                {slide.parts.map((part, partIndex) => (
+                  <span key={partIndex} className={part.c}>
                     {part.t}
                   </span>
                 ))}
               </h2>
 
-              <p className="mx-auto mt-5 max-w-xl text-base text-white/70 sm:text-lg">
+              <p className="mx-auto mt-5 max-w-xl text-base text-white/80 sm:text-lg">
                 {slide.text}
               </p>
 
