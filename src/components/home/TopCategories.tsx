@@ -50,9 +50,10 @@ const categories: {
   },
 ];
 
+// Covers sit in the top right corner, so the name below is never covered
 const coverSpots = [
-  "-bottom-3 right-12 w-[40%] -rotate-6",
-  "-bottom-5 -right-3 w-[44%] rotate-6",
+  "right-10 top-5 w-[36%] -rotate-6 sm:right-14",
+  "-right-2 top-9 w-[40%] rotate-6",
 ];
 
 export default function TopCategories({ books }: { books: Book[] }) {
@@ -80,7 +81,7 @@ export default function TopCategories({ books }: { books: Book[] }) {
               >
                 <Link
                   href={`/books?category=${name}`}
-                  className={`group relative flex h-full min-h-[260px] flex-col justify-between overflow-hidden rounded-3xl p-5 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${tone}`}
+                  className={`group relative flex h-full min-h-[280px] flex-col justify-between overflow-hidden rounded-3xl p-5 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${tone}`}
                 >
                   <span className="relative z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/25 transition-transform duration-300 group-hover:rotate-45">
                     <LuArrowUpRight className="h-5 w-5" />
@@ -90,7 +91,7 @@ export default function TopCategories({ books }: { books: Book[] }) {
                     covers.map((book, coverIndex) => (
                       <div
                         key={book._id}
-                        className={`absolute overflow-hidden rounded-md shadow-xl ring-1 ring-black/10 transition-transform duration-300 group-hover:scale-110 ${coverSpots[coverIndex]}`}
+                        className={`absolute overflow-hidden rounded-md shadow-xl ring-1 ring-black/10 transition-transform duration-300 group-hover:scale-105 ${coverSpots[coverIndex]}`}
                       >
                         <div className="relative aspect-[3/4] w-full bg-base-300">
                           <BookCover
@@ -102,7 +103,7 @@ export default function TopCategories({ books }: { books: Book[] }) {
                       </div>
                     ))
                   ) : (
-                    <Icon className="absolute -bottom-4 -right-4 h-32 w-32 opacity-20" />
+                    <Icon className="absolute right-4 top-6 h-20 w-20 opacity-25" />
                   )}
 
                   <div className="relative z-10">
@@ -111,7 +112,7 @@ export default function TopCategories({ books }: { books: Book[] }) {
                         ? `${list.length} ${list.length === 1 ? "book" : "books"}`
                         : text}
                     </p>
-                    <p className="font-display text-3xl font-extrabold uppercase leading-none">
+                    <p className="font-display text-4xl font-extrabold uppercase leading-none">
                       {name}
                     </p>
                   </div>
