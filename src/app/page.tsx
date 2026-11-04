@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getBooks } from "@/lib/api";
 import type { Book } from "@/types/book";
 import HeroSlider from "@/components/home/HeroSlider";
+import HeroSearch from "@/components/home/HeroSearch";
 import NewArrivals from "@/components/home/NewArrivals";
 import HowItWorks from "@/components/home/HowItWorks";
 import TopCategories from "@/components/home/TopCategories";
@@ -24,6 +25,7 @@ async function HomeContent() {
   return (
     <>
       <HeroSlider books={books} />
+      <HeroSearch />
       <NewArrivals books={books} failed={failed} />
       <HowItWorks />
       <TopCategories />
