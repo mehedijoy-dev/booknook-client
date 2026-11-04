@@ -9,61 +9,82 @@ import "swiper/css/pagination";
 import BookCover from "@/components/books/BookCover";
 import type { Book } from "@/types/book";
 
+interface Part {
+  t: string;
+  c?: string;
+}
+
 interface Slide {
-  label: string;
-  title: string;
+  parts: Part[];
   text: string;
-  tone: string;
-  picks: number[];
+  shift: number;
 }
 
 const slides: Slide[] = [
   {
-    label: "Browse the shelf",
-    title: "Your next favourite book is waiting",
-    text: "Stories, science, history and more, shared by readers like you.",
-    tone: "bg-base-200",
-    picks: [0, 1, 2],
+    parts: [
+      { t: "The next " },
+      { t: "chapter", c: "text-cat-science" },
+      { t: " in your " },
+      { t: "reading", c: "text-accent" },
+      { t: " journey" },
+    ],
+    text: "Browse a shelf full of page-turners shared by readers like you.",
+    shift: 0,
   },
   {
-    label: "Add a book",
-    title: "Got a book? Share it with the shelf",
+    parts: [
+      { t: "Got a book? " },
+      { t: "Share", c: "text-accent" },
+      { t: " it with the " },
+      { t: "shelf", c: "text-cat-science" },
+    ],
     text: "List it in a minute so someone else can enjoy it too.",
-    tone: "bg-cat-history/15",
-    picks: [3, 4, 5],
+    shift: 2,
   },
   {
-    label: "Borrow and return",
-    title: "Borrow for seven days, return in one click",
+    parts: [
+      { t: "Borrow for " },
+      { t: "seven days", c: "text-cat-science" },
+      { t: ", return in " },
+      { t: "one click", c: "text-accent" },
+    ],
     text: "Pick a book, confirm, and read at your own pace.",
-    tone: "bg-cat-others/10",
-    picks: [2, 5, 0],
+    shift: 4,
   },
 ];
 
-const lift = ["translate-y-6", "-translate-y-2", "translate-y-10"];
+const spots = [
+  "left-[3%] top-[14%] w-20 -rotate-6",
+  "left-[13%] top-[46%] w-24 rotate-3",
+  "left-[4%] top-[72%] w-16 rotate-[8deg]",
+  "right-[3%] top-[20%] w-20 rotate-6",
+  "right-[13%] top-[52%] w-24 -rotate-3",
+  "right-[4%] top-[8%] w-16 -rotate-[8deg]",
+];
 
 const swiperTheme = {
-  "--swiper-theme-color": "var(--color-base-content)",
-  "--swiper-navigation-color": "var(--color-base-content)",
-  "--swiper-pagination-bullet-inactive-color": "var(--color-base-content)",
-  "--swiper-pagination-bullet-inactive-opacity": "0.25",
+  "--swiper-theme-color": "#ffc043",
+  "--swiper-navigation-color": "#ffffff",
+  "--swiper-pagination-bullet-inactive-color": "#ffffff",
+  "--swiper-pagination-bullet-inactive-opacity": "0.4",
 } as React.CSSProperties;
 
-function Covers({ books, picks }: { books: Book[]; picks: number[] }) {
+function Floaters({ books, shift }: { books: Book[]; shift: number }) {
   if (books.length === 0) return null;
 
   return (
-    <div className="flex items-end justify-center gap-3 sm:gap-6">
-      {picks.map((pick, index) => {
-        const book = books[pick % books.length];
+    <>
+      {spots.map((spot, index) => {
+        const book = books[(index + shift) % books.length];
 
         return (
           <Link
             key={index}
             href={`/books/${book._id}`}
             aria-label={`Open ${book.title}`}
-            className={`block w-[30%] max-w-[190px] overflow-hidden rounded-xl shadow-[0_18px_40px_-12px_rgba(0,0,0,0.35)] transition-transform duration-300 hover:scale-105 ${lift[index]}`}
+            style={{ animationDelay: `${index * 0.8}s` }}
+            className={`animate-float absolute z-10 hidden overflow-hidden rounded-md opacity-95 shadow-2xl ring-1 ring-white/20 transition-opacity hover:opacity-100 lg:block ${spot}`}
           >
             <div className="relative aspect-[3/4] w-full bg-base-300">
               <BookCover
@@ -75,55 +96,52 @@ function Covers({ books, picks }: { books: Book[]; picks: number[] }) {
           </Link>
         );
       })}
-    </div>
+    </>
   );
 }
 
 export default function HeroSlider({ books }: { books: Book[] }) {
   return (
-    <section className="page-container pt-4 sm:pt-6">
-      <Swiper
-        modules={[Autoplay, Navigation, Pagination]}
-        slidesPerView={1}
-        loop
-        speed={600}
-        autoplay={{
-          delay: 3500,
-          pauseOnMouseEnter: true,
-          disableOnInteraction: false,
-        }}
-        pagination={{ clickable: true }}
-        navigation
-        className="hero-swiper overflow-hidden rounded-[2rem]"
-        style={swiperTheme}
-      >
-        {slides.map((slide) => (
-          <SwiperSlide key={slide.label}>
-            <div
-              className={`flex min-h-[540px] items-center px-6 pb-16 pt-12 sm:px-12 sm:pt-16 lg:min-h-[560px] lg:px-16 ${slide.tone}`}
-            >
-              <div className="grid w-full items-center gap-12 lg:grid-cols-2">
-                <div>
-                  <p className="text-sm font-semibold text-secondary">
-                    {slide.label}
-                  </p>
-                  <h2 className="mt-3 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                    {slide.title}
-                  </h2>
-                  <p className="mt-4 max-w-md text-lg text-base-content/65">
-                    {slide.text}
-                  </p>
-                  <Link href="/books" className="btn btn-primary btn-lg mt-8">
-                    Browse Books
-                  </Link>
-                </div>
+    <Swiper
+      modules={[Autoplay, Navigation, Pagination]}
+      slidesPerView={1}
+      loop
+      speed={600}
+      autoplay={{
+        delay: 3500,
+        pauseOnMouseEnter: true,
+        disableOnInteraction: false,
+      }}
+      pagination={{ clickable: true }}
+      navigation
+      className="hero-swiper"
+      style={swiperTheme}
+    >
+      {slides.map((slide) => (
+        <SwiperSlide key={slide.text}>
+          <div className="relative isolate flex min-h-[560px] items-center justify-center overflow-hidden bg-neutral px-4 pb-28 pt-16 text-center sm:min-h-[600px]">
+            <Floaters books={books} shift={slide.shift} />
 
-                <Covers books={books} picks={slide.picks} />
-              </div>
+            <div className="relative z-20 mx-auto max-w-3xl">
+              <h2 className="font-display text-5xl font-extrabold uppercase leading-[0.92] tracking-tight text-white sm:text-6xl lg:text-7xl">
+                {slide.parts.map((part, index) => (
+                  <span key={index} className={part.c}>
+                    {part.t}
+                  </span>
+                ))}
+              </h2>
+
+              <p className="mx-auto mt-5 max-w-xl text-base text-white/70 sm:text-lg">
+                {slide.text}
+              </p>
+
+              <Link href="/books" className="btn btn-primary btn-lg mt-8">
+                Browse Books
+              </Link>
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </section>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 }
