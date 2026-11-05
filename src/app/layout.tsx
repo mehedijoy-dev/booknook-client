@@ -1,20 +1,19 @@
 import type { Metadata } from "next";
-import { Barlow_Condensed, DM_Sans } from "next/font/google";
+import { Bricolage_Grotesque, Manrope } from "next/font/google";
 import "./globals.css";
 import ToastProvider from "@/components/ToastProvider";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const dmSans = DM_Sans({
+const manrope = Manrope({
   subsets: ["latin"],
-  variable: "--font-dmsans",
+  variable: "--font-manrope",
   display: "swap",
 });
 
-const barlow = Barlow_Condensed({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
-  variable: "--font-barlow",
+  variable: "--font-bricolage",
   display: "swap",
 });
 
@@ -35,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${barlow.variable}`}
+      className={`${manrope.variable} ${bricolage.variable}`}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
     >

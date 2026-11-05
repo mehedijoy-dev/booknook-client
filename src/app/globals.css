@@ -77,8 +77,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-dmsans), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
 }
 
 /* One colour for every category */
@@ -96,7 +96,7 @@
   }
 
   body {
-    font-family: var(--font-dmsans), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
     line-height: 1.65;
   }
 
@@ -104,15 +104,16 @@
   h2,
   h3,
   h4 {
-    letter-spacing: -0.02em;
-    line-height: 1.1;
+    font-family: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
   }
 }
 
 @layer components {
   /* Same heading style on every section of every page */
   .section-title {
-    @apply font-display text-4xl font-bold uppercase leading-[0.95] tracking-tight text-base-content sm:text-5xl lg:text-6xl;
+    @apply font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-base-content sm:text-4xl lg:text-5xl;
   }
 
   .section-subtitle {
@@ -202,4 +203,10 @@
   .animate-float {
     animation: none;
   }
+}
+/* With Manrope, display headings read best in normal case */
+.font-display {
+  text-transform: none !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.03em;
 }
