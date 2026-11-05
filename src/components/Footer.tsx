@@ -5,7 +5,7 @@ import {
   FaLinkedinIn,
   FaXTwitter,
 } from "react-icons/fa6";
-import { LuClock, LuMail } from "react-icons/lu";
+import { LuArrowUp, LuClock, LuMail } from "react-icons/lu";
 import Logo from "./Logo";
 import CurrentYear from "./CurrentYear";
 import { siteConfig } from "@/lib/site";
@@ -45,7 +45,8 @@ const socials = [
   },
 ];
 
-const linkClass = "transition-colors hover:text-accent";
+const linkClass = "inline-block py-1 transition-colors hover:text-accent";
+const headingClass = "font-display text-lg font-bold text-white sm:text-xl";
 
 export default function Footer() {
   return (
@@ -57,10 +58,11 @@ export default function Footer() {
         ))}
       </div>
 
-      <div className="page-container grid gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1.3fr]">
-        <div>
+      <div className="page-container grid grid-cols-2 gap-x-6 gap-y-10 py-12 sm:gap-x-10 sm:py-16 lg:grid-cols-[1.6fr_1fr_1fr_1.3fr] lg:gap-x-12">
+        {/* Brand */}
+        <div className="col-span-2 lg:col-span-1">
           <Logo />
-          <p className="mt-5 max-w-sm text-sm text-neutral-content/70">
+          <p className="mt-4 max-w-sm text-sm text-neutral-content/70">
             {siteConfig.tagline}
           </p>
 
@@ -72,7 +74,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-all duration-300 hover:-translate-y-1 hover:bg-accent hover:text-accent-content"
+                  className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 transition-all duration-300 hover:-translate-y-1 hover:bg-accent hover:text-accent-content sm:h-10 sm:w-10"
                 >
                   <Icon className="h-4 w-4" />
                 </a>
@@ -81,11 +83,10 @@ export default function Footer() {
           </ul>
         </div>
 
+        {/* Explore */}
         <div>
-          <h3 className="font-display text-xl font-bold uppercase tracking-wide text-white">
-            Explore
-          </h3>
-          <ul className="mt-4 space-y-2.5 text-sm text-neutral-content/70">
+          <h3 className={headingClass}>Explore</h3>
+          <ul className="mt-3 space-y-1 text-sm text-neutral-content/70">
             {quickLinks.map((link) => (
               <li key={link.href}>
                 <Link href={link.href} className={linkClass}>
@@ -96,16 +97,15 @@ export default function Footer() {
           </ul>
         </div>
 
+        {/* Categories */}
         <div>
-          <h3 className="font-display text-xl font-bold uppercase tracking-wide text-white">
-            Categories
-          </h3>
-          <ul className="mt-4 space-y-2.5 text-sm text-neutral-content/70">
+          <h3 className={headingClass}>Categories</h3>
+          <ul className="mt-3 space-y-1 text-sm text-neutral-content/70">
             {categories.map(({ name, dot }) => (
               <li key={name}>
                 <Link
                   href={`/books?category=${name}`}
-                  className={`inline-flex items-center gap-2 ${linkClass}`}
+                  className={`flex items-center gap-2 ${linkClass}`}
                 >
                   <span className={`h-2.5 w-2.5 rounded-full ${dot}`} />
                   {name}
@@ -115,21 +115,20 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
-          <h3 className="font-display text-xl font-bold uppercase tracking-wide text-white">
-            Contact
-          </h3>
-          <ul className="mt-4 space-y-3 text-sm text-neutral-content/70">
-            <li className="flex items-start gap-2">
+        {/* Contact */}
+        <div className="col-span-2 rounded-2xl bg-white/5 p-5 lg:col-span-1 lg:bg-transparent lg:p-0">
+          <h3 className={headingClass}>Contact</h3>
+          <ul className="mt-3 space-y-3 text-sm text-neutral-content/70">
+            <li className="flex items-start gap-3">
               <LuMail className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
               <a
                 href={`mailto:${siteConfig.email}`}
-                className={`break-all ${linkClass}`}
+                className="break-all transition-colors hover:text-accent"
               >
                 {siteConfig.email}
               </a>
             </li>
-            <li className="flex items-start gap-2">
+            <li className="flex items-start gap-3">
               <LuClock className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
               <span>{siteConfig.hours}</span>
             </li>
@@ -138,7 +137,14 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="page-container flex flex-col items-center justify-between gap-2 py-5 text-center text-sm text-neutral-content/60 sm:flex-row sm:text-left">
+        <div className="page-container flex flex-col items-center gap-3 py-6 text-center text-xs text-neutral-content/60 sm:flex-row sm:justify-between sm:text-left sm:text-sm">
+          <a
+            href="#"
+            aria-label="Back to top"
+            className="order-first flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-neutral-content transition-all duration-300 hover:-translate-y-1 hover:bg-accent hover:text-accent-content sm:order-last sm:h-10 sm:w-10"
+          >
+            <LuArrowUp className="h-5 w-5" />
+          </a>
           <p>
             &copy; <CurrentYear /> {siteConfig.name}. All rights reserved.
           </p>
