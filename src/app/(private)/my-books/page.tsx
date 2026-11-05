@@ -8,12 +8,11 @@ export const instant = false;
 export default function MyBooksPage() {
   return (
     <section className="page-container py-10 sm:py-16">
-      <div className="text-center">
-        <h1 className="section-title">My Books</h1>
-        <p className="section-subtitle mx-auto">
-          The books you added. Edit the details or remove a book from the shelf.
-        </p>
-      </div>
+      <span className="eyebrow">Your shelf</span>
+      <h1 className="section-title mt-3">My books</h1>
+      <p className="section-subtitle">
+        The books you added. Edit the details or remove a book from the shelf.
+      </p>
 
       <div className="mt-10">
         <MyBooks />
