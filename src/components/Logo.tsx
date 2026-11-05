@@ -14,9 +14,7 @@ export default function Logo() {
       >
         <LuBookOpen className="h-5 w-5" />
       </span>
-      <span className="font-display text-2xl font-extrabold uppercase tracking-wide">
-        BookNook
-      </span>
+      <span className="text-2xl font-extrabold tracking-tight">BookNook</span>
     </Link>
   );
 }
