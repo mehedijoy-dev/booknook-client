@@ -74,15 +74,14 @@ export default function BookDetails({ initialBook }: { initialBook: Book }) {
         Back to All Books
       </Link>
 
-      <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,440px)_1fr] lg:gap-14">
-        <div className="rounded-[2rem] bg-base-200 p-6 sm:p-10">
-          <div className="relative mx-auto aspect-[3/4] w-full max-w-xs overflow-hidden rounded-2xl bg-base-300 shadow-2xl">
-            <BookCover
-              src={book.image}
-              alt={`Cover of ${book.title}`}
-              className="absolute inset-0 h-full w-full"
-            />
-          </div>
+      <div className="mt-6 grid gap-8 lg:grid-cols-[minmax(0,440px)_1fr] lg:items-start lg:gap-14">
+        {/* The cover fills the whole box */}
+        <div className="relative mx-auto aspect-[3/4] w-full max-w-md overflow-hidden rounded-[2rem] bg-base-300 shadow-2xl lg:sticky lg:top-28 lg:mx-0 lg:max-w-none">
+          <BookCover
+            src={book.image}
+            alt={`Cover of ${book.title}`}
+            className="absolute inset-0 h-full w-full"
+          />
         </div>
 
         <div className="flex flex-col">
