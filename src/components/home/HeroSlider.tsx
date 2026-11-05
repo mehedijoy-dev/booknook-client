@@ -60,12 +60,12 @@ const slides: Slide[] = [
 ];
 
 const spots = [
-  "left-[3%] top-[14%] w-20 -rotate-6",
-  "left-[13%] top-[46%] w-24 rotate-3",
-  "left-[4%] top-[72%] w-16 rotate-[8deg]",
-  "right-[3%] top-[20%] w-20 rotate-6",
-  "right-[13%] top-[52%] w-24 -rotate-3",
-  "right-[4%] top-[8%] w-16 -rotate-[8deg]",
+  "left-[6%] top-[10%] w-20 -rotate-6",
+  "left-[16%] top-[40%] w-24 rotate-3",
+  "left-[7%] top-[66%] w-20 rotate-6",
+  "right-[6%] top-[10%] w-20 rotate-6",
+  "right-[16%] top-[40%] w-24 -rotate-3",
+  "right-[7%] top-[66%] w-20 -rotate-6",
 ];
 
 const swiperTheme = {
@@ -89,7 +89,7 @@ function Floaters({ books, shift }: { books: Book[]; shift: number }) {
             href={`/books/${book._id}`}
             aria-label={`Open ${book.title}`}
             style={{ animationDelay: `${index * 0.8}s` }}
-            className={`animate-float absolute z-10 hidden overflow-hidden rounded-md opacity-95 shadow-2xl ring-1 ring-white/20 transition-opacity hover:opacity-100 lg:block ${spot}`}
+            className={`animate-float absolute z-10 hidden overflow-hidden rounded-md opacity-95 shadow-2xl ring-1 ring-white/20 transition-opacity hover:opacity-100 xl:block ${spot}`}
           >
             <div className="relative aspect-[3/4] w-full bg-base-300">
               <BookCover
